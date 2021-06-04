@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     
     extend: {
-        screens:{
-
+      screens:{
+        
         'breakpointmedium':"1280px",
         'breakpointsmall':"520px",
       },
-    
+      
       colors:{
         textcolor:"#b1bdb4",
         blackprimary:"#16181b",
@@ -21,6 +21,11 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    // ...
+   overflow: false,
+  },
+ 
 }
 
 

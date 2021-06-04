@@ -5,7 +5,7 @@ import {MdNotifications,MdApps} from "react-icons/md"
 
 function Header() {
     return (
-        <div className="p-4 breakpointsmall:py-4 breakpointsmall:px-12 flex  justify-between items-center text-textcolor bg-blackprimary w-full h-16">
+        <div className="p-4  border-textcolor border-solid  breakpointsmall:py-4 breakpointsmall:px-12 flex fixed justify-between items-center text-textcolor bg-blackprimary w-full h-16">
             <FaBars
             size={26}
             className=" mr-1 breakpointsmall:hidden "
