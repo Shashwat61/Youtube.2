@@ -4,7 +4,9 @@ import {MdHistory,MdThumbUp, MdHome, MdSubscriptions, MdLibraryBooks, MdSentimen
 function Sidebar({handleSidebar,sidebar}) {
     console.log(sidebar);
     return (
-        <nav className={`bg-blacksecondary space-y-3 pt-8 flex flex-col text-textcolor list-none h-3/5  ${(sidebar ? 'block' :'hidden')}`}>
+        <nav className={`bg-blacksecondary space-y-3 pt-8 flex flex-col text-textcolor list-none h-3/5  ${(sidebar ? 'block' :'hidden')}`}
+        onClick={()=>handleSidebar()}
+        >
             <li className=" transition duration-200 ease-in-out px-6 flex items-center py-2.5 cursor-pointer hover:bg-bordercolor">
             <MdHome size={23}/>
             <span className="hidden breakpointmedium:inline ml-4 text-sm">Home</span>
