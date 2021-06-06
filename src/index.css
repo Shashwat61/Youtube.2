@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer utilities{
+
+   .overflow-x-scroll::-webkit-scrollbar{
+        display:none;
+    }
+}
 
 body{
     background-color: #16181b;

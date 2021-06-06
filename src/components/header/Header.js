@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {FaBars} from "react-icons/fa"
 import {AiOutlineSearch} from "react-icons/ai"
 import {MdNotifications,MdApps} from "react-icons/md"
 
-function Header() {
+function Header({handleSidebar}) {
+    
+    
     return (
         <div className="p-4 breakpointsmall:py-4 breakpointsmall:px-12 flex  justify-between items-center text-textcolor bg-blackprimary w-full h-20">
             <FaBars
+            onClick={()=>handleSidebar()}
             size={26}
-            className=" mr-1 breakpointsmall:hidden "
+            className=" mr-1 breakpointsmall:hidden cursor-pointer "
             />
              <img className="hidden breakpointsmall:block  h-9 w-9  object-contain" src="http://pngimg.com/uploads/youtube/youtube_PNG2.png" alt=""/>
             <div className=" flex bg-blacksecondary border rounded border-textcolor border-solid p-0.5 m-0.5 md:flex-1 md:mx-12 lg:flex-1 lg:mx-40  ">
