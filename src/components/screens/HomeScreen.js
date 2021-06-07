@@ -4,7 +4,7 @@ import Video from '../videos/Video'
 
 function HomeScreen() {
     return (
-        <div className="px-4 ">
+        <div className="px-4 my-20 ">
             <Categories/>
             
          <div className="grid  sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
