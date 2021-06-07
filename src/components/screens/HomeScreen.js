@@ -11,11 +11,11 @@ function HomeScreen() {
 
          {
              [...new Array(20)].map(()=>(
-                 <div className="">
+                //  <div className="">
                      
                  <Video/>
               
-                 </div>
+                //  </div>
              ))
             }   
             </div>

@@ -1,7 +1,13 @@
 import React from 'react'
 import {MdHistory,MdThumbUp, MdHome, MdSubscriptions, MdLibraryBooks, MdSentimentDissatisfied, MdExitToApp} from 'react-icons/md'
+import { useDispatch } from 'react-redux';
+import { logout } from '../../redux/actions/auth.action';
 
 function Sidebar({handleSidebar,sidebar}) {
+ const dispatch=useDispatch()
+    function handleLogOut(){
+     dispatch(logout())
+    }
     console.log(sidebar);
     return (
         <nav className={`bg-blacksecondary space-y-3 pt-8 flex flex-col text-textcolor list-none h-3/5  ${(sidebar ? 'block' :'hidden')}`}
@@ -32,7 +38,7 @@ function Sidebar({handleSidebar,sidebar}) {
             <span className=" hidden  breakpointmedium:inline ml-4 text-sm" >History</span>
             </li>
             <hr className="bg-bordercolor"/>
-            <li className="transition duration-200 ease-in-out px-6 flex items-center py-2.5 cursor-pointer hover:bg-bordercolor">
+            <li onClick={handleLogOut} className="transition duration-200 ease-in-out px-6 flex items-center py-2.5 cursor-pointer hover:bg-bordercolor">
             <MdExitToApp size={23}/>
             <span className="hidden  breakpointmedium:inline ml-4 text-sm">Log Out</span>
             </li>

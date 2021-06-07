@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {FaBars} from "react-icons/fa"
 import {AiOutlineSearch} from "react-icons/ai"
 import {MdNotifications,MdApps} from "react-icons/md"
@@ -7,7 +7,7 @@ function Header({handleSidebar}) {
     
     
     return (
-        <div className="p-4 breakpointsmall:py-4 breakpointsmall:px-12 flex  justify-between items-center text-textcolor bg-blackprimary w-full h-20">
+        <div className="p-4 z-50 breakpointsmall:py-4 fixed breakpointsmall:px-12 flex  justify-between items-center text-textcolor bg-blackprimary w-full h-20">
             <FaBars
             onClick={()=>handleSidebar()}
             size={26}
