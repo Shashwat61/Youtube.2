@@ -1,25 +1,66 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import request from '../../api'
 import {AiOutlineCheckCircle} from 'react-icons/ai'
+import moment from 'moment'
+import numeral from 'numeral'
 
-function Video() {
+function Video({video}) {
+    const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium}}}=video
+    
+    const [views,setViews]=useState(null)
+    const [duration,setDuration]=useState(null)
+    const [channelIcon,setChannelIcon]=useState(null)
+
+    const seconds=moment.duration(duration).asSeconds()
+    const _duration=moment.utc(seconds*1000).format("mm:ss")
+
+    const _videoId=id?.videoId || id
+    
+    useEffect(()=>{
+        const get_video_details=async ()=>{
+          const {data:{items}}= await request('/videos',{
+                params:{
+                  part:'contentDetails,statistics',
+                  id:_videoId,
+                }
+            })
+           setDuration(items[0].contentDetails.duration)
+           setViews(items[0].statistics.viewCount)
+
+        }
+        get_video_details()
+    },[_videoId])
+
+    useEffect(()=>{
+        const get_channel_icon=async ()=>{
+          const {data:{items}}= await request('/channels',{
+                params:{
+                  part:'snippet',
+                  id:channelId,
+                }
+            })
+            setChannelIcon(items[0].snippet.thumbnails.medium)
+        }
+        get_channel_icon()
+    },[channelId])
+
     return (
-        <div className="p-2 mb-4 text-sm sm:p-4 sm:mb-4 breakpointsmall:text-base text-textcolor font-semibold">
+        <div className="p-2 mb-4 text-sm sm:p-4 sm:mb-4 md:text-base text-textcolor font-semibold">
                 
             <div className="relative">
-           <img className="w-full" src="https://i.ytimg.com/vi/bmVKaAV_7-A/hq720_live.jpg?sqp=CLSn84UG-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDcjrQvZduC-mGGA6JYj_uS2WPKGQ" alt=""/>
-            <span className="absolute bottom-1 right-1">5:42</span>
+           <img className="w-full" src={medium.url} alt=""/>
+            <span className="absolute bg-blacksecondary bottom-1 right-1">{_duration}</span>
             </div>
            <div className=" flex items-center">
-               <div className="">
-               <img className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" src="https://yt3.ggpht.com/ytc/AAUvwngO0llm73-SopWyvegaOHSf6IaMh0_OM40QpqgI=s68-c-k-c0x00ffffff-no-rj" alt="logo"/>
-               </div>
-                   
-               <div className="pl-4 py-2">
-               <h3>Chill Lofi Beats to code/relax</h3>
-               <span className="flex items-center ">Shash Tech <AiOutlineCheckCircle className="ml-2"/></span>
+              
+               <img className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" src={channelIcon?.url} alt="logo"/>
+              
+               <div className="  pl-4 py-2 w-full">
+               <h3 className=" line-clamp-1 text-whitecolor ">{title}</h3>
+               <span className="flex items-center ">{channelTitle} <AiOutlineCheckCircle className="ml-2"/></span>
                <div className="flex">
-               <span className="flex">7M views
-               • 5 hours ago</span>
+               <span className="flex">{numeral(views).format("0.a")} views
+               • {moment(publishedAt).fromNow()}</span>
                </div>
                </div>
            </div>
