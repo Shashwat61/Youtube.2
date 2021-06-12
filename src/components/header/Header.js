@@ -2,9 +2,14 @@ import React from 'react'
 import {FaBars} from "react-icons/fa"
 import {AiOutlineSearch} from "react-icons/ai"
 import {MdNotifications,MdApps} from "react-icons/md"
+import { useHistory } from 'react-router'
 
 function Header({handleSidebar}) {
+    const history=useHistory()
     
+    function handleHome(){
+        history.push('/')
+    }
     
     return (
         <div className="p-4 z-50 breakpointsmall:py-4 fixed breakpointsmall:px-12 flex  justify-between items-center text-textcolor bg-blackprimary w-full h-20">
@@ -13,7 +18,7 @@ function Header({handleSidebar}) {
             size={26}
             className=" mr-1 breakpointsmall:hidden cursor-pointer "
             />
-             <img className="hidden breakpointsmall:block  h-9 w-9  object-contain" src="http://pngimg.com/uploads/youtube/youtube_PNG2.png" alt=""/>
+             <img onClick={handleHome} className="hidden cursor-pointer breakpointsmall:block  h-9 w-9  object-contain" src="http://pngimg.com/uploads/youtube/youtube_PNG2.png" alt=""/>
             <div className=" flex bg-blacksecondary border rounded border-textcolor border-solid p-0.5 m-0.5 md:flex-1 md:mx-12 lg:flex-1 lg:mx-40  ">
                 {/* search  */}
                 <input className="w-full bg-transparent p-1 focus:outline-none" type="text" placeholder="search"/>

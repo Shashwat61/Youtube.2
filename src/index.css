@@ -8,7 +8,23 @@
     }
 }
 
+
 body{
     background-color: #16181b;
-    position: relative;
+    /* position: relative; */
+}
+body::-webkit-scrollbar{
+    /* background-color:black; */
+    width:5px;
+    border:1px solid black;
+}
+/* body::-webkit-scrollbar-button{
+    background-color: whitesmoke;
+    border-radius: 10px;
+    width:5px;
+} */
+body::-webkit-scrollbar-thumb{
+    background-color: white;
+    border-radius: 10px;
+
 }

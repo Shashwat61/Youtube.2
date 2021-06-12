@@ -17,8 +17,11 @@ module.exports = {
         blackprimary:"#16181b",
         blacksecondary:"#121417",
       },
+      borderWidth: {
+        '1': '1px',
     },
   },
+},
   variants: {
     extend: {},
   },

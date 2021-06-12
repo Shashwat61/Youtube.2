@@ -1,4 +1,4 @@
-import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS } from "../actionTypes"
+import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, SELECTED_VIDEOS_FAIL, SELECTED_VIDEOS_REQUEST, SELECTED_VIDEOS_SUCCESS } from "../actionTypes"
 
 export const homeVideosReducer=(state={
     videos:[],
@@ -14,7 +14,9 @@ action
         case HOME_VIDEOS_SUCCESS:
             return{
                 ...state,
-                videos:payload.videos,
+                videos:
+                state.activeCategory===payload.category?[...state.videos,...payload.videos]:payload.videos,
+                
                 loading:false,
                 nextPageToken:payload.nextPageToken,
                 activeCategory:payload.category
@@ -34,4 +36,39 @@ action
             default:
                 return state
     }
+}
+
+export const selectedVideoReducer=(state={
+loading:true,
+video:null,
+},
+action
+)=>{
+   const {payload,type}=action
+
+   switch(type){
+       case SELECTED_VIDEOS_REQUEST:
+           return {
+               ...state,
+            loading:true,
+           }
+
+        case SELECTED_VIDEOS_SUCCESS:
+            return {
+                ...state,
+                video:payload,
+                loading:false,
+            }
+
+        case SELECTED_VIDEOS_FAIL:
+            return {
+                ...state,
+                video:null,
+                loading:false,
+                error:payload,
+
+            }
+           default:
+               return state
+   }
 }

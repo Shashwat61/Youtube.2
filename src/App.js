@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 import HomeScreen from './components/screens/HomeScreen';
 import LoginScreen from './components/screens/login/LoginScreen';
 import NotFound from './components/screens/notfound/NotFound';
+import WatchScreen from './components/screens/watchscreen/WatchScreen';
 import Sidebar from './components/sidebar/Sidebar';
 
 const Layout=({children})=>{
@@ -20,7 +21,7 @@ const Layout=({children})=>{
   return (
     <React.Fragment>
       <Header handleSidebar={handleSidebar} />
-      <div className="flex w-full h-full">
+      <div className="flex w-full h-full ">
         <Sidebar handleSidebar={handleSidebar} sidebar={sidebar}/>
         <div className="w-full px-6 overflow-x-hidden">
           {children}
@@ -54,6 +55,12 @@ function App() {
     
     <Route path="/auth">
       <LoginScreen/>
+    </Route>
+    <Route path="/watch/:id">
+      <Layout>
+      <WatchScreen/>
+      </Layout>
+
     </Route>
     <Route>
       <NotFound/>
