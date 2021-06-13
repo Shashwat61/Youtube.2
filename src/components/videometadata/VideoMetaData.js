@@ -32,12 +32,12 @@ function VideoMetaData({video:{snippet,statistics},videoId}) {
                • {moment(publishedAt).fromNow()}
                </span>
                  <div className="flex space-x-2 items-center">
-                     <span className="flex">
-                         <MdThumbUp size={26}/>
+                     <span className="flex items-center">
+                         <MdThumbUp size={26} className="h-5 md:h-10"/>
                          {numeral(likeCount).format("0.a")}
                          </span>
-                     <span className="flex">
-                         <MdThumbDown size={26}/>
+                     <span className="flex items-center">
+                         <MdThumbDown size={26} className="h-5 md:h-10"/>
                          {numeral(dislikeCount).format("0.a")}
                          </span>
                  </div>

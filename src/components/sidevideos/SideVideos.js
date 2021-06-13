@@ -1,25 +1,70 @@
 import moment from 'moment'
 import numeral from 'numeral'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { useHistory } from 'react-router'
+import request from '../../api'
 
-function SideVideos() {
-    return (
-        <div className="flex border-bordercolor border-b-1 w-full items-center  py-2">
-            <div className="relative">
-                <LazyLoadImage effect="blur" className="object-contain lg:w-36 lg:h-36" src="https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png" alt=""/>
-             <div className="absolute bottom-1 right-1 p-0.5 rounded-sm bg-blacksecondary">
-                 12:20
+function SideVideos({video}) {
+    const [views,setViews]=useState(null)
+    const [duration,setDuration]=useState(null)
+    const [channelIcon,setChannelIcon]=useState(null)
+    const history=useHistory()
+
+    const {id,
+        snippet:{channelTitle,channelId,description,title,publishedAt,thumbnails:{medium},},}=video
+
+        useEffect(()=>{
+            const get_video_details=async ()=>{
+              const {data:{items}}= await request('/videos',{
+                    params:{
+                      part:'contentDetails,statistics',
+                      id:id.videoId,
+                    }
+                })
+               setDuration(items[0].contentDetails.duration)
+               setViews(items[0].statistics.viewCount)
+    
+            }
+            get_video_details()
+        },[id])
+    
+        useEffect(()=>{
+            const get_channel_icon=async ()=>{
+              const {data:{items}}= await request('/channels',{
+                    params:{
+                      part:'snippet',
+                      id:channelId,
+                    }
+                })
+                setChannelIcon(items[0].snippet.thumbnails.medium)
+            }
+            get_channel_icon()
+        },[channelId])   
+    
+        const seconds=moment.duration(duration).asSeconds()
+        const _duration=moment.utc(seconds*1000).format("mm:ss")
+    
+        function handleClick(){
+            history.push(`/watch/${id.videoId}`)
+        }
+
+        return (
+        <div className="cursor-pointer grid grid-cols-2 place-content-center border-bordercolor border-b-1 w-full items-center  py-2 hover:opacity-80 " onClick={handleClick}>
+            <div className="lg:col-span-1 relative">
+                <LazyLoadImage effect="blur" className="w-full object-contain lg:h-36 " src={medium.url} alt=""/>
+             <div className="absolute bottom-4 right-1 p-0.5 rounded-sm bg-blacksecondary text-xs">
+                {_duration}
              </div>
             </div>
-            <div className="pl-3 space-y-1 whitespace-nowrap lg:whitespace-pre-line ">
-                <h5>Be a front end developer in 1 month</h5>
-                <div className="">
-                <span className="flex">{numeral(1000000).format("0.a")} views
-               • {moment('2020-04-01').fromNow()}</span>
+            <div className=" pl-2 col-span-1 space-y-1  lg:text-sm ">
+                <h5 className="font-medium text-whitecolor line-clamp-2" >{title}</h5>
+                <div className="text-xs ">
+                <span className="flex">{numeral(views).format("0.a")} views
+               • {moment(publishedAt).fromNow()}</span>
                 </div>
-                <div>
-                    <p>Channel Title</p>
+                <div className="text-xs ">
+                    <p>{channelTitle}</p>
                 </div>
             </div>
             
