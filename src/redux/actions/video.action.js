@@ -1,5 +1,5 @@
 import request from "../../api"
-import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS,RELATED_VIDEO_FAIL,RELATED_VIDEO_REQUEST,RELATED_VIDEO_SUCCESS,SELECTED_VIDEOS_FAIL, SELECTED_VIDEOS_REQUEST, SELECTED_VIDEOS_SUCCESS} from "../actionTypes"
+import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS,RELATED_VIDEO_FAIL,RELATED_VIDEO_REQUEST,RELATED_VIDEO_SUCCESS,SELECTED_VIDEOS_FAIL, SELECTED_VIDEOS_REQUEST, SELECTED_VIDEOS_SUCCESS,SEARCHED_VIDEO_REQUEST,SEARCHED_VIDEO_SUCCESS,SEARCHED_VIDEO_FAIL} from "../actionTypes"
 
 export const getPopularVideos=()=>async (dispatch,getState)=>{
 
@@ -130,7 +130,36 @@ export const getVideosByCategory=(keyword)=>async (dispatch,getState)=>{
 
 
 
+export const getVideosBySearch=(keyword)=>async (dispatch,getState)=>{
 
+    try{
+     dispatch({
+         type:SEARCHED_VIDEO_REQUEST
+     })
+     const {data}=await request("/search",{
+         params:{
+             part:'snippet',
+             maxResults:20,
+            //  pageToken:getState().homeVideos.nextPageToken,
+             q:keyword,
+             type:'video,channel',
+         },
+     })
+    
+     dispatch({
+         type:SEARCHED_VIDEO_SUCCESS,
+         payload:data.items,         
+        })
+     //console.log(data)
+    }catch(err){
+        console.log(err.message)
+        dispatch({
+            type:SEARCHED_VIDEO_FAIL,
+            payload:err.message,
+        })
+    }
+    
+    }
 
 
 

@@ -6,6 +6,7 @@ import Header from './components/header/Header';
 import HomeScreen from './components/screens/HomeScreen';
 import LoginScreen from './components/screens/login/LoginScreen';
 import NotFound from './components/screens/notfound/NotFound';
+import SearchScreen from './components/screens/searchScreen/SearchScreen';
 import WatchScreen from './components/screens/watchscreen/WatchScreen';
 import Sidebar from './components/sidebar/Sidebar';
 
@@ -60,8 +61,13 @@ function App() {
       <Layout>
       <WatchScreen/>
       </Layout>
-
     </Route>
+    <Route path="/search/:query">
+      <Layout>
+      <SearchScreen/>
+      </Layout>
+    </Route>
+
     <Route>
       <NotFound/>
     </Route>
