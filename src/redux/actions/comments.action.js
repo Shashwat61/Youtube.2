@@ -60,7 +60,7 @@ export const getCommentsOfVideoById=(id)=>async dispatch =>{
              type:CREATE_COMMENT_SUCCESS,
          })
          setTimeout(()=>
-         dispatch(getCommentsOfVideoById(id)),3000)
+         dispatch(getCommentsOfVideoById(id)),1000)
         }catch(err){
             console.log(err.response.data)
             dispatch({

@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import {Route,Switch, useHistory} from 'react-router-dom'
 import './App.css';
 import Header from './components/header/Header';
+import ChannelScreen from './components/screens/channelScreen/ChannelScreen';
 import HomeScreen from './components/screens/HomeScreen';
 import LoginScreen from './components/screens/login/LoginScreen';
 import NotFound from './components/screens/notfound/NotFound';
 import SearchScreen from './components/screens/searchScreen/SearchScreen';
+import Subscriptions from './components/screens/subscriptions/Subscriptions';
 import WatchScreen from './components/screens/watchscreen/WatchScreen';
 import Sidebar from './components/sidebar/Sidebar';
 
@@ -16,7 +18,7 @@ const Layout=({children})=>{
   function handleSidebar(){
     setSidebar(!sidebar)
   }
-  console.log(sidebar)
+
 
  
   return (
@@ -65,6 +67,16 @@ function App() {
     <Route path="/search/:query">
       <Layout>
       <SearchScreen/>
+      </Layout>
+    </Route>
+    <Route path='/feed/subscriptions'>
+      <Layout>
+    <Subscriptions/>
+      </Layout>
+    </Route>
+    <Route path='/channel/:channelId'>
+      <Layout>
+      <ChannelScreen/>
       </Layout>
     </Route>
 

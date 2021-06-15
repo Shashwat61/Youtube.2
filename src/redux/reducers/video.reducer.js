@@ -1,4 +1,4 @@
-import { HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEOS_FAIL, SELECTED_VIDEOS_REQUEST, SELECTED_VIDEOS_SUCCESS } from "../actionTypes"
+import { CHANNEL_VIDEOS_FAIL, CHANNEL_VIDEOS_REQUEST, CHANNEL_VIDEOS_SUCCESS, HOME_VIDEOS_FAIL, HOME_VIDEOS_REQUEST, HOME_VIDEOS_SUCCESS, RELATED_VIDEO_FAIL, RELATED_VIDEO_REQUEST, RELATED_VIDEO_SUCCESS, SEARCHED_VIDEO_FAIL, SEARCHED_VIDEO_REQUEST, SEARCHED_VIDEO_SUCCESS, SELECTED_VIDEOS_FAIL, SELECTED_VIDEOS_REQUEST, SELECTED_VIDEOS_SUCCESS, SUBSCRIPTION_CHANNEL_FAIL, SUBSCRIPTION_CHANNEL_REQUEST, SUBSCRIPTION_CHANNEL_SUCCESS } from "../actionTypes"
 
 export const homeVideosReducer=(state={
     videos:[],
@@ -131,6 +131,76 @@ export const searchedVideoReducer=(state={
                 }
     
             case SEARCHED_VIDEO_FAIL:
+                return {
+                    ...state,             
+                    loading:false,
+                    error:payload,
+    
+                }
+               default:
+                   return state
+       }
+    }
+
+export const subscriptionChannelsReducer=(state={
+    loading:true,
+    videos:[],
+    },
+    action
+    )=>{
+       const {payload,type}=action
+    
+       switch(type){
+           case SUBSCRIPTION_CHANNEL_REQUEST:
+               return {
+                   ...state,
+                loading:true,
+               }
+    
+            case SUBSCRIPTION_CHANNEL_SUCCESS:
+                return {
+                    ...state,
+                    videos:payload,
+                    loading:false,
+                }
+    
+            case SUBSCRIPTION_CHANNEL_FAIL:
+                return {
+                    ...state,             
+                    loading:false,
+                    error:payload,
+    
+                }
+               default:
+                   return state
+       }
+    }
+
+
+
+export const channelVideosReducer=(state={
+    loading:true,
+    videos:[],
+    },
+    action
+    )=>{
+       const {payload,type}=action
+    
+       switch(type){
+           case CHANNEL_VIDEOS_REQUEST:
+               return {
+                   ...state,
+                loading:true,
+               }
+    
+            case CHANNEL_VIDEOS_SUCCESS:
+                return {
+                    ...state,
+                    videos:payload,
+                    loading:false,
+                }
+    
+            case CHANNEL_VIDEOS_FAIL:
                 return {
                     ...state,             
                     loading:false,

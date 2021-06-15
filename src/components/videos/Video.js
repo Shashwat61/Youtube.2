@@ -7,8 +7,8 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useHistory } from 'react-router'
 
 
-function Video({video}) {
-    const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium}}}=video
+function Video({video,channelScreen}) {
+    const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium},},contentDetails}=video
     
     const [views,setViews]=useState(null)
     const [duration,setDuration]=useState(null)
@@ -18,7 +18,7 @@ function Video({video}) {
     const seconds=moment.duration(duration).asSeconds()
     const _duration=moment.utc(seconds*1000).format("mm:ss")
 
-    const _videoId=id?.videoId || id
+    const _videoId=id?.videoId ||contentDetails?.videoId || id
     
     useEffect(()=>{
         const get_video_details=async ()=>{
@@ -26,7 +26,7 @@ function Video({video}) {
                 params:{
                   part:'contentDetails,statistics',
                   id:_videoId,
-                }
+                },
             })
            setDuration(items[0].contentDetails.duration)
            setViews(items[0].statistics.viewCount)
@@ -43,7 +43,7 @@ function Video({video}) {
                   id:channelId,
                 }
             })
-            setChannelIcon(items[0].snippet.thumbnails.medium)
+            setChannelIcon(items[0].snippet.thumbnails.default)
         }
         get_channel_icon()
     },[channelId])
@@ -56,14 +56,15 @@ function Video({video}) {
         <div className="cursor-pointer p-2 mb-4 text-sm sm:p-4 sm:mb-4 md:text-base text-textcolor font-semibold" onClick={handleClick}>
                 
             <div className="relative">
-           {/* <img className="w-full" src={medium.url} alt=""/> */}
+           
            <LazyLoadImage width="100%" src={medium?.url} effect="blur" alt=""/>
             <span className="absolute  bg-blacksecondary rounded text-xs p-0.5 bottom-1.5 right-0.5">{_duration}</span>
             </div>
            <div className=" flex items-center">
               
-               {/* <img className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" src={channelIcon?.url} alt="logo"/> */}
+              {!channelScreen &&
               <LazyLoadImage className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" src={channelIcon?.url} alt="logo"/>
+               }
                <div className="  pl-4 py-2 w-full">
                <h3 className=" line-clamp-1 text-whitecolor ">{title}</h3>
                <span className="flex items-center ">{channelTitle} <AiOutlineCheckCircle className="ml-2"/></span>
