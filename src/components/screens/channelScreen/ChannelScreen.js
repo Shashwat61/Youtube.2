@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router'
 import { getChannelDetails } from '../../../redux/actions/channel.action'
 import { getVideosByChannel } from '../../../redux/actions/video.action'
-import SkeletonLoader from '../../skeleton/SkeletonLoader'
 import Video from '../../videos/Video'
 
 function ChannelScreen() {
@@ -23,9 +22,9 @@ function ChannelScreen() {
     return (
         <React.Fragment>
           <div className="text-xs sm:text-sm md:text-base my-20 border-b-1 border-bordercolor ">
-              <div className="text-textcolor flex justify-between items-center px-10 py-2">
-              <div className="flex items-center">
-              <img className="w-16 h-16 md:w-20 md:h-20 rounded-full mr-2" src={snippet?.thumbnails?.default?.url} alt=""/>
+              <div className="text-textcolor flex justify-between items-center px-2 md:px-10 py-2">
+              <div className="flex items-center ">
+              <img className="w-12 h-12 md:w-20 md:h-20 rounded-full mr-2" src={snippet?.thumbnails?.default?.url} alt=""/>
               <div className="font-medium">
               <h3>{snippet?.title}</h3>
                     <span>
@@ -34,11 +33,11 @@ function ChannelScreen() {
                     </span>
                 </div>
               </div>
-              <button className="py-2 px-4 bg-red-700 text-whitecolor focus:outline-none border-none" >Subscribe</button>
+              <button className="ml-2 py-1 px-4 bg-red-700 text-whitecolor focus:outline-none border-none" >Subscribe</button>
               </div>
       
               </div>
-              <div className="grid pt-2" >
+              <div className="grid " >
               {
                   !loading ? (
                       

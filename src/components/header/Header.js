@@ -14,7 +14,7 @@ function Header({handleSidebar}) {
     function handleSubmit(e){
         e.preventDefault()
         history.push(`/search/${input}`)
-        setInput('')
+        setInput(' ')
     }
     return (
         <div className="p-4 z-50 breakpointsmall:py-4 fixed breakpointsmall:px-12 flex  justify-between items-center text-textcolor bg-blackprimary w-full h-20">

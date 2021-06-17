@@ -58,19 +58,21 @@ function SideVideos({video,searchScreen,subScreen}) {
         }
 
         return (
-                <div className={ `cursor-pointer grid grid-cols-2 pt-10
-                text-xs sm:text-sm md:text-base  place-content-center border-bordercolor border-b-1 w-full items-center  py-2 hover:opacity-80 ${(searchScreen||subScreen) && 'text-textcolor'} md:${(searchScreen||subScreen) && 'grid-cols-4'}`} onClick={handleClick}>
-            <div className={`col-span-1 lg:col-span-1 relative`}>
-                <LazyLoadImage effect="blur" className={`w-full object-contain   ${thumbnail && 'rounded-full p-10  '}` } src={medium.url} alt=""/>
+                <div className={ `cursor-pointer grid grid-cols-3 lg:${!(subScreen || searchScreen) && 'grid-cols-2'} pt-10
+                    text-xs sm:text-sm md:text-base  place-content-center border-bordercolor border-b-1 w-full items-center  py-2 hover:opacity-80 ${(searchScreen||subScreen) && 'text-textcolor'} md:${(searchScreen||subScreen) && 'grid-cols-4'}`}
+                onClick={handleClick}>
+            <div className={`${subScreen && 'flex justify-center'} lg:${(subScreen || searchScreen) && 'col-span-1'}  relative`}>
+                <LazyLoadImage effect="blur" className={`${thumbnail && 'rounded-full w-16 h-16 md:h-24 md:w-24' }    object-contain`} src={medium.url} alt=""/>
             {isVideo &&
 
-                 <div className={`absolute bottom-2 lg:${(searchScreen||subScreen) ? 'bottom-3' : 'bottom-10'}  right-2   p-0.5 rounded-sm bg-blacksecondary text-xs`}>
+                 <div className={` absolute bottom-2 lg:${(searchScreen||subScreen) && 'bottom-3'}  right-2  lg:right-2  md:p-0.5 rounded-sm bg-blacksecondary text-xs`}>
                 {_duration}
              </div>
             }
             
             </div>
-            <div className={`${(searchScreen || subScreen) && 'text-textcolor'} md:${(searchScreen||subScreen) && 'col-span-3'} pl-2 col-span-1 space-y-1  lg:text-sm `}>
+            <div className={`${(searchScreen || subScreen) && 'text-textcolor'} md:${(searchScreen||subScreen) && 'col-span-3'}
+            lg:${(searchScreen||subScreen) && 'col-span-3'} pl-2 col-span-2 lg:col-span-1 space-y-1  lg:${!subScreen && 'text-sm'} `}>
                 <h5 className={`text-whitecolor font-medium  ${(searchScreen||subScreen) &&'text-textcolor'} line-clamp-2`} >{title}</h5>
 
                 {isVideo && 
@@ -83,12 +85,12 @@ function SideVideos({video,searchScreen,subScreen}) {
 
                 {(searchScreen || subScreen) && <p className="hidden sm:block sm:line-clamp-2 ">{description}</p>}
 
-                <div className="text-xs ">
+                <div className="text-xs flex items-center ">
                     { isVideo &&
 
                         <LazyLoadImage className="w-8 h-8 breakpointsmall:w-10 breakpointsmall:h-10 rounded-full" src={channelIcon?.url} effect="blur" alt=""/>
                     }
-                    <p>{channelTitle}</p>
+                    <p className="pl-1 line-clamp-1" >{channelTitle}</p>
                 </div>
                 {
                     subScreen && <p className="mt-2">{video.contentDetails.totalItemCount} Videos</p>

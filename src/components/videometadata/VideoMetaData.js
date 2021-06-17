@@ -26,7 +26,7 @@ function VideoMetaData({video:{snippet,statistics},videoId}) {
      <div className="py-2 text-textcolor">
             {/* top     */}
             <div className="flex flex-col">
-                <h5 className="text-lg font-medium">{title}</h5>
+                <h5 className="text-sm sm:text-base md:text-lg font-medium">{title}</h5>
                 <div className="flex py-3 items-center justify-between">
                 <span className="flex">{numeral(viewCount).format("0.a")} views
                • {moment(publishedAt).fromNow()}
@@ -37,7 +37,7 @@ function VideoMetaData({video:{snippet,statistics},videoId}) {
                          {numeral(likeCount).format("0.a")}
                          </span>
                      <span className="flex items-center">
-                         <MdThumbDown size={26} className="h-5 md:h-10"/>
+                         <MdThumbDown size={26} className="h-5 md:h-10" />
                          {numeral(dislikeCount).format("0.a")}
                          </span>
                  </div>

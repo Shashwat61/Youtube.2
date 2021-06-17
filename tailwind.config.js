@@ -8,6 +8,7 @@ module.exports = {
 
         'breakpointmedium':"1280px",
         'breakpointsmall':"520px",
+        'breakpointmediumlarge':'920px',
       },
     
       colors:{

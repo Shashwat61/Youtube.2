@@ -101,7 +101,7 @@ export const getVideosByCategory=(keyword)=>async (dispatch,getState)=>{
       }
   }
 
-  export const getRealtedVideos=(id)=>async dispatch=>{
+  export const getRelatedVideos=(id)=>async dispatch=>{
     try {
         dispatch({
           type:RELATED_VIDEO_REQUEST
@@ -171,6 +171,7 @@ export const getSubscriptionChannels=()=>async (dispatch,getState)=>{
              params:{
                  part:'snippet,contentDetails',
                  mine:true,
+                 maxResults:10,
              },
              headers:{
                  Authorization:`Bearer ${getState().auth.accessToken}`,
