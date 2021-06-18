@@ -6,9 +6,10 @@ import { getRelatedVideos, getVideoById } from '../../../redux/actions/video.act
 import Comments from '../../comments/Comments'
 import SideVideos from '../../sidevideos/SideVideos'
 import VideoMetaData from '../../videometadata/VideoMetaData'
-
+import {Helmet} from 'react-helmet'
 function WatchScreen() {
     const {id}=useParams()
+    console.log(id)
     const dispatch=useDispatch()
 
     useEffect(()=>{
@@ -20,7 +21,7 @@ function WatchScreen() {
     const {videos,loading:relatedVideoLoading}=useSelector(state=>state.relatedVideos)
     return (
         <div className="text-xs sm:text-sm md:text-base flex my-20  text-textcolor ">
-
+          <Helmet description="Youtube"><title>{video?.snippet?.title}</title></Helmet>
          <div className="grid  lg:grid-cols-12  lg:gap-0">
          <div className="col-span-12 lg:col-span-8">
           <div className="h-60 sm:h-72 md:h-96 mb-4">

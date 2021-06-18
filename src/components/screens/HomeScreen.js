@@ -4,7 +4,6 @@ import { getPopularVideos, getVideosByCategory } from '../../redux/actions/video
 import Categories from '../categoriesbar/Categories'
 import Video from '../videos/Video'
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Loader from "react-loader-spinner";
 import SkeletonLoader from '../skeleton/SkeletonLoader'
 
 
@@ -38,7 +37,7 @@ function HomeScreen() {
             next={fetchData}
             hasMore={true}
             loader={<div className="grid place-items-center p-2">
-                <Loader type="TailSpin" color="red" height={50} width={50}/>
+                <SkeletonLoader type="TailSpin" color="red" height={50} width={50}/>
                 </div>
                  }
 

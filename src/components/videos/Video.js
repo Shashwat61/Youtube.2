@@ -7,7 +7,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useHistory } from 'react-router'
 
 
-function Video({video,channelScreen}) {
+function Video({video,channelScreen,likedVideos}) {
     const {id,snippet:{channelId,channelTitle,title,publishedAt,thumbnails:{medium},},contentDetails}=video
     
     const [views,setViews]=useState(null)
@@ -53,25 +53,27 @@ function Video({video,channelScreen}) {
     }
 
     return (
-        <div className="cursor-pointer p-2 mb-4 text-sm sm:p-4 sm:mb-4 md:text-base text-textcolor font-semibold" onClick={handleClick}>
+        <div onClick={handleClick} className={`cursor-pointer p-2 mb-4 text-sm sm:p-4 sm:mb-4 md:text-base text-textcolor font-semibold lg:${likedVideos && 'flex justify-start'} ${likedVideos && 'hover:opacity-80'} lg:${likedVideos && 'pl-16'}  `}>
                 
-            <div className="relative">
+            <div className={`relative lg:${likedVideos && 'w-52'}`}>
            
-           <LazyLoadImage width="100%" src={medium?.url} effect="blur" alt=""/>
+           <LazyLoadImage width='100%' src={medium?.url} effect="blur" alt=""/>
             <span className="absolute  bg-blacksecondary rounded text-xs p-0.5 bottom-1.5 right-0.5">{_duration}</span>
             </div>
            <div className=" flex items-center">
               
-              {!channelScreen &&
+              {(!channelScreen && !likedVideos) && 
               <LazyLoadImage className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" src={channelIcon?.url} alt="logo"/>
                }
-               <div className="  pl-4 py-2 w-full">
+               <div className="pl-4 py-2 w-full">
                <h3 className=" line-clamp-1 text-whitecolor ">{title}</h3>
                <span className="flex items-center ">{channelTitle} <AiOutlineCheckCircle className="ml-2"/></span>
+               {!likedVideos && 
                <div className="flex">
                <span className="flex">{numeral(views).format("0.a")} views
                • {moment(publishedAt).fromNow()}</span>
                </div>
+               }
                </div>
            </div>
         </div>

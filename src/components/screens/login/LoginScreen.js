@@ -20,7 +20,7 @@ function LoginScreen() {
 
     return (
         <div className="h-screen text-textcolor grid place-content-center ">
-        <div className="p-10  sm:p-20 bg-blacksecondary rounded-lg shadow-lg  grid place-items-center">
+        <div className="p-10  sm:p-20 bg-blacksecondary rounded-lg  grid place-items-center">
             <h3 className=" sm:text-xl font-bold ">YouTube</h3>
             <img className="h-24 w-24 object-contain sm:h-32 sm:w-32" src="http://pngimg.com/uploads/youtube/youtube_PNG2.png" alt=""/>
             <button className="p-2 text-sm sm:text-base mt-2 sm:p-3 border rounded-md hover:bg-whitecolor hover:text-blackprimary transition-all ease-in-out focus:outline-none " onClick={handleLogin}>Login with Google</button>

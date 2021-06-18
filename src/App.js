@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import {Route,Switch, useHistory} from 'react-router-dom'
 import './App.css';
 import Header from './components/header/Header';
+import LikeVideos from './components/likedvideos/LikeVideos';
 import ChannelScreen from './components/screens/channelScreen/ChannelScreen';
 import HomeScreen from './components/screens/HomeScreen';
 import LoginScreen from './components/screens/login/LoginScreen';
@@ -77,6 +78,11 @@ function App() {
     <Route path='/channel/:channelId'>
       <Layout>
       <ChannelScreen/>
+      </Layout>
+    </Route>
+    <Route path='/liked'>
+      <Layout>
+      <LikeVideos/>
       </Layout>
     </Route>
 

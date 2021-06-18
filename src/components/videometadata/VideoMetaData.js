@@ -5,6 +5,7 @@ import {MdThumbDown, MdThumbUp} from 'react-icons/md'
 import ShowMoreText from 'react-show-more-text'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkSubscriptionStatus, getChannelDetails } from '../../redux/actions/channel.action'
+import HelmetCustom from '../HelmetCustom'
 
 
 
@@ -24,6 +25,7 @@ function VideoMetaData({video:{snippet,statistics},videoId}) {
 
     return (
      <div className="py-2 text-textcolor">
+         <HelmetCustom title={title} description={description}></HelmetCustom>
             {/* top     */}
             <div className="flex flex-col">
                 <h5 className="text-sm sm:text-base md:text-lg font-medium">{title}</h5>
