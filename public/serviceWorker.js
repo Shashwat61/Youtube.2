@@ -1,5 +1,5 @@
 const CACHE_NAME='cache-v1'
-const preResources=['/','index.html','offline.html']
+const preResources=['index.html','offline.html']
 
 const self=this
 

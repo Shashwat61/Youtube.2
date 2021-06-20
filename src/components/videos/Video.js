@@ -5,6 +5,7 @@ import moment from 'moment'
 import numeral from 'numeral'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useHistory } from 'react-router'
+import clsx from 'clsx'
 
 
 function Video({video,channelScreen,likedVideos}) {
@@ -53,20 +54,20 @@ function Video({video,channelScreen,likedVideos}) {
     }
 
     return (
-        <div onClick={handleClick} className={`cursor-pointer p-2 mb-4 text-sm sm:p-4 sm:mb-4 md:text-base text-textcolor font-semibold lg:${likedVideos && 'flex justify-start'} ${likedVideos && 'hover:opacity-80'} lg:${likedVideos && 'pl-16'}  `}>
+        <div onClick={handleClick} className={clsx('cursor-pointer p-2 mb-4 text-sm sm:p-4 sm:mb-4 md:text-base text-textcolor font-semibold',likedVideos && 'lg:flex justify-start',likedVideos && 'hover:opacity-80', likedVideos && 'lg:pl-16')}>
                 
-            <div className={`relative lg:${likedVideos && 'w-52'}`}>
+            <div className={clsx('relative',likedVideos && 'lg:w-52')}>
            
            <LazyLoadImage width='100%' src={medium?.url} effect="blur" alt=""/>
             <span className="absolute  bg-blacksecondary rounded text-xs p-0.5 bottom-1.5 right-0.5">{_duration}</span>
             </div>
-           <div className=" flex items-center">
+           <div className="flex items-center ">
               
               {(!channelScreen && !likedVideos) && 
-              <LazyLoadImage className="h-8 w-8 sm:h-10 sm:w-10 rounded-full" src={channelIcon?.url} alt="logo"/>
+              <LazyLoadImage className="w-8 h-8 rounded-full sm:h-10 sm:w-10" src={channelIcon?.url} alt="logo"/>
                }
-               <div className="pl-4 py-2 w-full">
-               <h3 className=" line-clamp-1 text-whitecolor ">{title}</h3>
+               <div className="w-full py-2 pl-4">
+               <h3 className=" line-clamp-1 text-whitecolor">{title}</h3>
                <span className="flex items-center ">{channelTitle} <AiOutlineCheckCircle className="ml-2"/></span>
                {!likedVideos && 
                <div className="flex">

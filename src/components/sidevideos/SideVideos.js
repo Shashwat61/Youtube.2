@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { useHistory } from 'react-router'
 import request from '../../api'
+import clsx from 'clsx'
 
 function SideVideos({video,searchScreen,subScreen}) {
     const [views,setViews]=useState(null)
@@ -13,7 +14,6 @@ function SideVideos({video,searchScreen,subScreen}) {
     
     const {id,
         snippet:{channelTitle,channelId,description,title,publishedAt,thumbnails:{medium},resourceId},}=video
-        console.log(id)
         const isVideo=!(id.kind === "youtube#channel" || subScreen)
         
         const seconds=moment.duration(duration).asSeconds()
@@ -50,7 +50,7 @@ function SideVideos({video,searchScreen,subScreen}) {
             get_channel_icon()
         },[channelId])   
         
-        console.log(isVideo)
+       
         function handleClick(){
             isVideo 
              ? history.push(`/watch/${id.videoId}`)
@@ -58,21 +58,20 @@ function SideVideos({video,searchScreen,subScreen}) {
         }
 
         return (
-                <div className={ `cursor-pointer grid grid-cols-3 lg:${!(subScreen || searchScreen) && 'grid-cols-2'} pt-10
-                    text-xs sm:text-sm md:text-base  place-content-center border-bordercolor border-b-1 w-full items-center  py-2 hover:opacity-80 ${(searchScreen||subScreen) && 'text-textcolor'} md:${(searchScreen||subScreen) && 'grid-cols-4'}`}
+                <div className={clsx('cursor-pointer grid grid-cols-3 pt-10 text-xs sm:text-sm md:text-base  place-content-center border-bordercolor border-b-1 w-full items-center  py-2 hover:opacity-80', 
+                !(subScreen || searchScreen) && 'lg:grid-cols-2',(searchScreen||subScreen) && 'text-textcolor',(searchScreen||subScreen) && 'md:grid-cols-4')}
                 onClick={handleClick}>
-            <div className={`${subScreen && 'flex justify-center'} lg:${(subScreen || searchScreen) && 'col-span-1'}  relative`}>
-                <LazyLoadImage effect="blur" className={`${thumbnail && 'rounded-full w-16 h-16 md:h-24 md:w-24' }    object-contain`} src={medium.url} alt=""/>
+            <div className={clsx('relative', subScreen && 'flex justify-center', (subScreen || searchScreen) && 'lg:col-span-1')}>
+                <LazyLoadImage effect="blur" className={clsx('object-contain', thumbnail && 'rounded-full w-16 h-16 md:h-24 md:w-24')} src={medium.url} alt={medium.url}/>
             {isVideo &&
 
-                 <div className={` absolute bottom-2 lg:${(searchScreen||subScreen) && 'bottom-3'}  right-2  lg:right-2  md:p-0.5 rounded-sm bg-blacksecondary text-xs`}>
+                 <div className={clsx('absolute bottom-2 right-2  lg:right-2  md:p-0.5 rounded-sm bg-blacksecondary text-xs',(searchScreen||subScreen) && 'lg:bottom-3')}>
                 {_duration}
              </div>
             }
             
             </div>
-            <div className={`${(searchScreen || subScreen) && 'text-textcolor'} md:${(searchScreen||subScreen) && 'col-span-3'}
-            lg:${(searchScreen||subScreen) && 'col-span-3'} pl-2 col-span-2 lg:col-span-1 space-y-1  lg:${!subScreen && 'text-sm'} `}>
+            <div className={clsx((searchScreen || subScreen) && 'text-textcolor', (searchScreen||subScreen) && 'md:col-span-3',(searchScreen||subScreen) && 'lg:col-span-3','pl-2 col-span-2 lg:col-span-1 space-y-1', !subScreen && 'lg:text-sm' )}>
                 <h5 className={`text-whitecolor font-medium  ${(searchScreen||subScreen) &&'text-textcolor'} line-clamp-2`} >{title}</h5>
 
                 {isVideo && 
@@ -85,10 +84,10 @@ function SideVideos({video,searchScreen,subScreen}) {
 
                 {(searchScreen || subScreen) && <p className="hidden sm:block sm:line-clamp-2 ">{description}</p>}
 
-                <div className="text-xs flex items-center ">
+                <div className="flex items-center text-xs ">
                     { isVideo &&
 
-                        <LazyLoadImage className="w-8 h-8 breakpointsmall:w-10 breakpointsmall:h-10 rounded-full" src={channelIcon?.url} effect="blur" alt=""/>
+                        <LazyLoadImage className="w-8 h-8 rounded-full breakpointsmall:w-10 breakpointsmall:h-10" src={channelIcon?.url} effect="blur" alt={channelIcon?.url}/>
                     }
                     <p className="pl-1 line-clamp-1" >{channelTitle}</p>
                 </div>

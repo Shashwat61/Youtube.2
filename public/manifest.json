@@ -1,12 +1,18 @@
 {
-  "short_name": "Youtube2.0 ",
+  "short_name": "Youtube2.0",
   "name": "Youtube2.0 PWA",
   "icons": [
     {
-      "src": "/images/logo.png",
+      "src": "/images/icon.png",
       "type": "image/png",
-      "sizes": "1024x1024",
-      "purpose":"any maskable"
+      "sizes": "512x512",
+      "purpose":"any"
+    },
+    {
+      "src": "/images/icon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose":"maskable"
     }
   ],
   "start_url": ".",
